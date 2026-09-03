@@ -1,0 +1,30 @@
+name: Deploy to anynines PaaS
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 */25 * *'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Cloud Foundry CLI
+        run: |
+          wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo gpg --dearmor -o /usr/share/keyrings/cloudfoundry.gpg
+          echo "deb [signed-by=/usr/share/keyrings/cloudfoundry.gpg] https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+          sudo apt-get update
+          sudo apt-get install -y cf8-cli
+
+      - name: Login to anynines Cloud Foundry
+        run: |
+          cf login -a https://api.de.a9s.eu -u "${{ secrets.A9S_USERNAME || 'paas@lz1861.nyc.mn' }}" -p "${{ secrets.A9S_PASSWORD || 'LLHlys123...' }}" -o paas_lz1861_nyc_mn -s production
+
+      - name: Deploy Application (VLESS-XHTTP)
+        run: |
+          cf push
