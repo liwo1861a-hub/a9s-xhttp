@@ -1,11 +1,13 @@
 ---
 applications:
-  - name: telemetry-edge
-    memory: 256M
-    instances: 1
-    buildpack: nodejs_buildpack
-    command: node server.js
-    env:
-      NODE_ENV: production
-      UUID: 81fedb63-36c2-4c88-857d-4692c1fca5f5
-      XHTTP_PATH: /telemetry/v1/stream
+- name: telemetry-edge
+  command: node server.js
+  buildpacks:
+    - nodejs_buildpack
+  random-route: true
+  health-check-type: port
+  memory: 256M
+  env:
+    NODE_ENV: production
+    UUID: "81fedb63-36c2-4c88-857d-4692c1fca5f5"
+    XHTTP_PATH: "/telemetry/v1/stream"
