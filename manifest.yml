@@ -4,7 +4,8 @@ applications:
   command: node server.js
   buildpacks:
     - nodejs_buildpack
-  random-route: true
+  routes:
+    - route: lz-xhttp-node.de.a9sapp.eu
   health-check-type: port
   memory: 256M
   env:
