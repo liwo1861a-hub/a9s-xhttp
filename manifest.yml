@@ -1,0 +1,10 @@
+---
+applications:
+- name: telemetry-edge
+  command: node server.js
+  buildpacks:
+    - nodejs_buildpack
+  health-check-type: port
+  memory: 256M
+  env:
+    NODE_ENV: production

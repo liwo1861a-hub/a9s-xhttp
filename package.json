@@ -1,0 +1,23 @@
+{
+  "name": "telemetry-edge",
+  "version": "1.2.0",
+  "description": "Enterprise distributed edge telemetry collector & latency benchmark service",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "telemetry",
+    "edge",
+    "metrics",
+    "benchmark",
+    "system-diagnostics"
+  ],
+  "author": "EdgeOps Infrastructure Group",
+  "license": "Apache-2.0",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {}
+}
